@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/bootstrap-5.3.0-dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/bootstrap-5.3.0-dist/js/bootstrap.bundle.min.js" defer></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('/images/bg.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .box {
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+            transition: .5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .box.hide {
+            transform: translateY(-20px) translateY(100%);
+            opacity: 0;
+        }
+
+        .boc-lai {
+            background: green;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .boc-lai .col-lg-1 {
+            margin-right: 20px;
+        }
+
+        .thuoc-tinh-anh {
+            display: flex;
+            transition: transform 1s;
+        }
+
+        .thuoc-tinh-anh img {
+            width: 20rem;
+            height: 20rem;
+        }
+
+        .tam-anh {
+            transition: .5s ease-out;
+            cursor: pointer;
+        }
+
+        .tam-anh:hover {
+            scale: 1.5;
+        }
+
+        .text {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<section class="box">
+    <div class="boc-lai">
+        <div class="thuoc-tinh-anh">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-1">
+                <img class="tam-anh" src="/images/work1.png" alt="image" data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+            <div class="col-lg-1">
+                <img class="tam-anh" src="/images/work2.png" alt="image" data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+            <div class="col-lg-1">
+                <img class="tam-anh" src="/images/work3.png" alt="image" data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+            <div class="col-lg-1">
+                <img class="tam-anh" src="/images/work4.png" alt="image" data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+            <div class="col-lg-1">
+                <img class="tam-anh" src="/images/work5.png" alt="image" data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+            <div class="col-lg-1">
+                <img class="tam-anh" src="/images/work6.png" alt="image" data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+            <div class="col-lg-1">
+                <img class="tam-anh" src="/images/work7.png" alt="image" data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+            <div class="col-lg-1">
+                <img class="tam-anh" src="/images/work8.png" alt="image" data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+            <div class="col-lg-1">
+                <img class="tam-anh" src="/images/work9.png" alt="image" data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+            <div class="col-lg-1">
+                <img class="tam-anh" src="/images/work10.png" alt="image" data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+            <div class="col-lg-1">
+                <img class="tam-anh" src="/images/work11.png" alt="image" data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Product name</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center row">
+        <div class="col-lg-6">
+            <img id="modalImage" src="" alt="Image" style="width: 100%; height: auto;">
+        </div>
+        <div class="col-lg-6">
+            <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere magnam autem repellat amet eius doloremque, aut officiis aliquam blanditiis deleniti, laudantium eum ducimus quidem inventore? Exercitationem minima, omnis fugit repudiandae animi consectetur laudantium minus praesentium soluta ipsa quibusdam hic temporibus ipsam neque. Laboriosam ad animi, asperiores suscipit error molestiae rerum!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    const container = document.querySelector('.boc-lai');
+    const imageRow = document.querySelector('.thuoc-tinh-anh');
+    const box = document.querySelector('.box');
+
+    container.addEventListener('mousemove', (event) => {
+        const windowWidth = window.innerWidth;
+        const mouseX = event.clientX;
+        const mousePercent = (mouseX / windowWidth) * 100;
+        imageRow.style.transform = `translateX(-${mousePercent}%)`;
+    });
+
+    container.addEventListener('mouseout', () => {
+        imageRow.style.transform = 'translateX(0)';
+    });
+
+    // Mở modal khi nhấn ảnh
+    const images = document.querySelectorAll('.thuoc-tinh-anh img');
+    images.forEach(image => {
+        image.addEventListener('click', () => {
+            const src = image.getAttribute('src');
+            document.getElementById('modalImage').setAttribute('src', src);
+            box.classList.add('hide');
+        });
+    });
+
+    $('#imageModal').on('hidden.bs.modal', function () {
+        box.classList.remove('hide');
+    });
+</script>
+</body>
+</html>
